@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# Author: Li Long
+# Date: 2018/5/26
+
+import re,sys,urllib2,time
+def my_get_time_stamp():
+    ct = time.time()
+    local_time = time.localtime(ct)
+    data_head = time.strftime("%Y%m%d%H%M%S", local_time)
+    data_secs = (ct - long(ct)) * 1000
+    time_stamp = "%s%06d" % (data_head, data_secs)
+    return time_stamp
+my_sys_time = my_get_time_stamp()
+ipv6memberip =  sys.argv[1]
+memberport = sys.argv[2]
+ipv4memberip = ipv6memberip.split(':')[-1]
+my_url = 'http://' + ipv4memberip + ':' + memberport + '/hello'
+#url = "http://10.65.36.106:40001/hello"
+my_headers = {
+    "Content-Type": "text/json; charset=utf-8",
+    "User-Agent": "F5-EVA-MONITOR"
+}
+
+data = r'"txninfo":"{\"txncode\":\"TimeLock\",\"instid\":\"71000142\",\"mchntid\":\"710001420000001\",\"posid\":\"200000010001\",\"syssesq\":\"CHANGE_ME\",\"txndate\":\"20180522\",\"txntime\":\"155840\",\"city\":\"7100\"}","signcode":"4FA346002ECFA74075C286E2BCB3A676119AEFAE4A014B030E4D0DCD767AEF47E845FF71C3EA3A4CE1CF4BECA2DB4D9C55E65984465C10E7A4B19630262EF703A0BC6AB071B3C2AC3E4BDC9655CC59ACF6B5EBF7E3C178E56ECA19767447F7CB96AEF908B061DB0AEFAE2C3E89884221EBEB9E4346551B2A97F3F76D7C9D1A5E"'
+change_data = re.sub("CHANGE_ME",my_sys_time,data)
+my_post_data = 'data={' + change_data + '}'
+my_request = urllib2.Request(url=my_url,headers=my_headers,data=my_post_data)
+my_response = urllib2.urlopen(my_request)
+my_receive = my_response.read()
+my_list = my_receive.split(",")
+type(my_list)
+result = my_list.count('\\"responsecode\\":\\"000016\\"')
+try:
+    if result == 1:
+        print "UP"
+except:
+    print "Don't find responsecode"
