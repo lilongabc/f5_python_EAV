@@ -29,7 +29,7 @@ my_request = urllib2.Request(url=my_url,headers=my_headers,data=my_post_data)
 my_response = urllib2.urlopen(my_request)
 my_receive = my_response.read()
 my_list = my_receive.split(",")
-type(my_list)
+#type(my_list)
 result = my_list.count('\\"responsecode\\":\\"000016\\"')
 try:
     if result == 1:
