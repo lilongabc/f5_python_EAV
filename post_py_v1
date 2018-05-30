@@ -19,7 +19,7 @@ my_url = 'http://' + ipv4memberip + ':' + memberport + '/hello'
 #url = "http://10.65.36.106:40001/hello"
 my_headers = {
     "Content-Type": "text/json; charset=utf-8",
-    "User-Agent": "F5-EVA-MONITOR"
+    "User-Agent": "F5-EAV-MONITOR"
 }
 
 data = r'"txninfo":"{\"txncode\":\"TimeLock\",\"instid\":\"71000142\",\"mchntid\":\"710001420000001\",\"posid\":\"200000010001\",\"syssesq\":\"CHANGE_ME\",\"txndate\":\"20180522\",\"txntime\":\"155840\",\"city\":\"7100\"}","signcode":"4FA346002ECFA74075C286E2BCB3A676119AEFAE4A014B030E4D0DCD767AEF47E845FF71C3EA3A4CE1CF4BECA2DB4D9C55E65984465C10E7A4B19630262EF703A0BC6AB071B3C2AC3E4BDC9655CC59ACF6B5EBF7E3C178E56ECA19767447F7CB96AEF908B061DB0AEFAE2C3E89884221EBEB9E4346551B2A97F3F76D7C9D1A5E"'
