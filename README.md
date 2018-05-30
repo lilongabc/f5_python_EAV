@@ -1,2 +1,2 @@
-# f5_python_EAV
-f5_python_EAV Demo
+# F5 Python EAV
+F5 External Application Verification Monitors Demo
